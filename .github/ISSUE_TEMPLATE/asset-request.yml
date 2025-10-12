@@ -1,0 +1,89 @@
+name: 🖼️ Solicitud de Asset
+description: Solicitar un nuevo asset o modificación de uno existente
+title: "[ASSET REQUEST] "
+labels: ["enhancement", "asset-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por contribuir al repositorio de assets de Fluxem. Por favor, completa la siguiente información para ayudarnos a entender tu solicitud.
+
+  - type: dropdown
+    id: asset-type
+    attributes:
+      label: Tipo de Asset
+      description: ¿Qué tipo de asset necesitas?
+      options:
+        - Logo
+        - Icono
+        - Banner
+        - Imagen/Fotografía
+        - Gráfico/Ilustración
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: project
+    attributes:
+      label: Proyecto Relacionado
+      description: ¿Para qué proyecto es este asset?
+      placeholder: ej. Fluxem, Kiaro, Estyma, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: Describe detalladamente qué asset necesitas
+      placeholder: |
+        Ejemplo: Necesito un logo horizontal de Fluxem para usar en el footer del sitio web. 
+        Debe tener fondo transparente y estar disponible en formato SVG y PNG.
+    validations:
+      required: true
+
+  - type: textarea
+    id: specifications
+    attributes:
+      label: Especificaciones Técnicas
+      description: Requisitos específicos (tamaño, formato, colores, etc.)
+      placeholder: |
+        - Formato: SVG, PNG
+        - Tamaños: 200x50px, 400x100px
+        - Colores: Versión normal y monocromática
+        - Fondo: Transparente
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad
+      description: ¿Qué tan urgente es esta solicitud?
+      options:
+        - Baja - No hay prisa
+        - Media - Necesario en las próximas semanas
+        - Alta - Necesario pronto
+        - Crítica - Bloqueante para el proyecto
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto Adicional
+      description: Cualquier información adicional que pueda ser útil
+      placeholder: |
+        - ¿Dónde se usará el asset?
+        - ¿Hay ejemplos o referencias?
+        - ¿Hay restricciones especiales?
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Términos
+      description: Por favor confirma lo siguiente
+      options:
+        - label: He verificado que este asset no existe ya en el repositorio
+          required: true
+        - label: Esta solicitud es para un proyecto oficial de Fluxem
+          required: true

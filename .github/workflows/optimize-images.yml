@@ -1,0 +1,280 @@
+name: 🖼️ Optimize Images
+
+on:
+  pull_request:
+    paths:
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.gif'
+      - '**.svg'
+  push:
+    branches: [ main ]
+    paths:
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.gif'
+      - '**.svg'
+
+jobs:
+  optimize-images:
+    name: Optimize Images
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🛒 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: |
+          npm install -g imagemin-cli
+          npm install -g imagemin-pngquant
+          npm install -g imagemin-mozjpeg
+          npm install -g imagemin-gifsicle
+          npm install -g imagemin-svgo
+
+      - name: 🗂️ Get Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files: |
+            **.png
+            **.jpg
+            **.jpeg
+            **.gif
+            **.svg
+
+      - name: 🎨 Optimize Images
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Optimizing images..."
+          
+          # Crear directorio temporal
+          mkdir -p optimized
+          
+          # Función para optimizar PNG
+          optimize_png() {
+            echo "Optimizing PNG: $1"
+            imagemin "$1" --plugin=pngquant --out-dir=optimized/$(dirname "$1")
+            if [ -f "optimized/$1" ]; then
+              mv "optimized/$1" "$1"
+              echo "✅ Optimized: $1"
+            fi
+          }
+          
+          # Función para optimizar JPG
+          optimize_jpg() {
+            echo "Optimizing JPG: $1"
+            imagemin "$1" --plugin=mozjpeg --out-dir=optimized/$(dirname "$1")
+            if [ -f "optimized/$1" ]; then
+              mv "optimized/$1" "$1"
+              echo "✅ Optimized: $1"
+            fi
+          }
+          
+          # Función para optimizar GIF
+          optimize_gif() {
+            echo "Optimizing GIF: $1"
+            imagemin "$1" --plugin=gifsicle --out-dir=optimized/$(dirname "$1")
+            if [ -f "optimized/$1" ]; then
+              mv "optimized/$1" "$1"
+              echo "✅ Optimized: $1"
+            fi
+          }
+          
+          # Función para optimizar SVG
+          optimize_svg() {
+            echo "Optimizing SVG: $1"
+            imagemin "$1" --plugin=svgo --out-dir=optimized/$(dirname "$1")
+            if [ -f "optimized/$1" ]; then
+              mv "optimized/$1" "$1"
+              echo "✅ Optimized: $1"
+            fi
+          }
+          
+          # Procesar archivos cambiados
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            # Crear directorio de salida si no existe
+            mkdir -p "optimized/$(dirname "$file")"
+            
+            case "${file,,}" in
+              *.png)
+                optimize_png "$file"
+                ;;
+              *.jpg|*.jpeg)
+                optimize_jpg "$file"
+                ;;
+              *.gif)
+                optimize_gif "$file"
+                ;;
+              *.svg)
+                optimize_svg "$file"
+                ;;
+            esac
+          done
+          
+          # Limpiar directorio temporal
+          rm -rf optimized
+
+      - name: 📊 Generate Size Report
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "## 📊 Image Optimization Report" > size_report.md
+          echo "" >> size_report.md
+          echo "| File | Status |" >> size_report.md
+          echo "|------|--------|" >> size_report.md
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [ -f "$file" ]; then
+              size=$(du -h "$file" | cut -f1)
+              echo "| $file | ✅ Optimized ($size) |" >> size_report.md
+            fi
+          done
+
+      - name: 💬 Comment PR
+        if: github.event_name == 'pull_request' && steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let body = '## 🎨 Image Optimization Results\n\n';
+            body += 'Your images have been automatically optimized! Here\'s what happened:\n\n';
+            
+            if (fs.existsSync('size_report.md')) {
+              const report = fs.readFileSync('size_report.md', 'utf8');
+              body += report;
+            }
+            
+            body += '\n\n### ✅ Optimization Benefits\n';
+            body += '- **Faster loading**: Smaller files = better performance\n';
+            body += '- **Better UX**: Optimized images improve user experience\n';
+            body += '- **SEO friendly**: Faster sites rank better\n';
+            body += '- **Bandwidth savings**: Reduces server costs\n\n';
+            body += '*This optimization was performed automatically by our CI/CD pipeline.*';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: 🚀 Commit Optimizations
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Solo hacer commit si hay cambios
+          if ! git diff --quiet; then
+            git add .
+            git commit -m "🎨 Auto-optimize images [skip ci]"
+            git push
+            echo "✅ Images optimized and committed"
+          else
+            echo "ℹ️ No optimization needed"
+          fi
+
+  validate-assets:
+    name: Validate Assets
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🛒 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check File Naming
+        run: |
+          echo "Checking file naming conventions..."
+          
+          # Buscar archivos que no siguen las convenciones
+          bad_names=()
+          
+          # Buscar archivos con espacios
+          while IFS= read -r -d '' file; do
+            if [[ "$file" == *" "* ]]; then
+              bad_names+=("$file (contains spaces)")
+            fi
+          done < <(find . -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.svg" -print0)
+          
+          # Buscar archivos con mayúsculas
+          while IFS= read -r -d '' file; do
+            basename=$(basename "$file")
+            if [[ "$basename" != "${basename,,}" ]]; then
+              bad_names+=("$file (contains uppercase)")
+            fi
+          done < <(find . -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.svg" -print0)
+          
+          if [ ${#bad_names[@]} -gt 0 ]; then
+            echo "❌ Files with naming issues found:"
+            printf '%s\n' "${bad_names[@]}"
+            echo ""
+            echo "Please rename files to follow our conventions:"
+            echo "- Use lowercase letters only"
+            echo "- Use hyphens instead of spaces"
+            echo "- Be descriptive but concise"
+            exit 1
+          else
+            echo "✅ All file names follow conventions"
+          fi
+
+      - name: 📏 Check File Sizes
+        run: |
+          echo "Checking file sizes..."
+          
+          large_files=()
+          max_size=5242880  # 5MB in bytes
+          
+          while IFS= read -r -d '' file; do
+            size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+            if [ "$size" -gt "$max_size" ]; then
+              size_mb=$(echo "scale=2; $size/1048576" | bc)
+              large_files+=("$file (${size_mb}MB)")
+            fi
+          done < <(find . -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.svg" -print0)
+          
+          if [ ${#large_files[@]} -gt 0 ]; then
+            echo "⚠️ Large files found (>5MB):"
+            printf '%s\n' "${large_files[@]}"
+            echo ""
+            echo "Consider optimizing these files or using Git LFS for very large assets."
+            # Warning, not error - we allow large files but warn about them
+          else
+            echo "✅ All files are within size limits"
+          fi
+
+      - name: 🏷️ Validate SVG Files
+        run: |
+          echo "Validating SVG files..."
+          
+          svg_files=($(find . -name "*.svg"))
+          
+          if [ ${#svg_files[@]} -gt 0 ]; then
+            for svg in "${svg_files[@]}"; do
+              # Check if SVG is valid XML
+              if ! xmllint --noout "$svg" 2>/dev/null; then
+                echo "❌ Invalid SVG: $svg"
+                exit 1
+              fi
+              
+              # Check for common security issues
+              if grep -q "<script" "$svg"; then
+                echo "❌ SVG contains script tag: $svg"
+                exit 1
+              fi
+              
+              echo "✅ Valid SVG: $svg"
+            done
+          else
+            echo "ℹ️ No SVG files to validate"
+          fi

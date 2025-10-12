@@ -1,24 +1,90 @@
-# Compiled class file
-*.class
+# ===========================================
+# FLUXEM IMAGES REPOSITORY - .GITIGNORE
+# ===========================================
 
-# Log file
+# ===== ARCHIVOS TEMPORALES =====
+# Archivos temporales del sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Archivos temporales de editores
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ===== ARCHIVOS DE TRABAJO =====
+# Archivos de trabajo de diseño (no finales)
+*.psd.tmp
+*.ai.tmp
+*-working.*
+*-draft.*
+*-temp.*
+*-backup.*
+
+# Archivos de versiones en progreso
+*-v[0-9].*
+*-version[0-9].*
+*-copy.*
+
+# ===== FORMATOS NO DESEADOS =====
+# Formatos propietarios que pueden ser problemáticos
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xd
+
+# Archivos muy grandes (usar Git LFS si es necesario)
+*.tiff
+*.tif
+*.bmp
+*.raw
+
+# ===== ARCHIVOS GENERADOS =====
+# Miniaturas y caches
+.thumbnails/
+.cache/
+thumbs/
+previews/
+
+# Archivos generados por herramientas
+*.generated.*
+optimized/
+compressed/
+
+# ===== CONFIGURACIÓN LOCAL =====
+# Configuración personal del desarrollador
+.env
+.env.local
+config.local.*
+
+# Logs
 *.log
+logs/
 
-# BlueJ files
-*.ctxt
+# ===== DIRECTORIOS TEMPORALES =====
+# Directorios de trabajo temporal
+temp/
+tmp/
+working/
+drafts/
+backup/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Node modules (si se usan herramientas de optimización)
+node_modules/
+npm-debug.log*
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# ===== EXCEPCIONES =====
+# Permitir ciertos archivos importantes
+!.gitkeep
+!README.md
+!LICENSE
+!CONTRIBUTING.md

@@ -1,0 +1,84 @@
+name: 🐛 Reporte de Problema
+description: Reportar un problema con un asset existente
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por ayudarnos a mejorar nuestro repositorio de assets. Por favor, describe el problema que encontraste.
+
+  - type: input
+    id: asset-path
+    attributes:
+      label: Asset Afectado
+      description: Ruta completa al asset con problema
+      placeholder: ej. fluxem/fluxem-icon.png
+    validations:
+      required: true
+
+  - type: dropdown
+    id: problem-type
+    attributes:
+      label: Tipo de Problema
+      description: ¿Qué tipo de problema es?
+      options:
+        - Calidad de imagen (baja resolución, pixelado)
+        - Formato incorrecto
+        - Archivo corrupto
+        - Nombre incorrecto
+        - Ubicación incorrecta
+        - Problema de licencia/copyright
+        - Asset desactualizado
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del Problema
+      description: Describe detalladamente el problema
+      placeholder: |
+        Ejemplo: El logo de Fluxem está pixelado cuando se usa en tamaños grandes. 
+        Parece ser una imagen de baja resolución escalada.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento Esperado
+      description: ¿Cómo debería verse o comportarse el asset?
+      placeholder: |
+        El logo debería verse nítido a cualquier tamaño y estar disponible 
+        en formato vectorial (SVG) para escalado sin pérdida de calidad.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      description: ¿Dónde notaste el problema? ¿En qué estás trabajando?
+      placeholder: |
+        - Navegador/aplicación donde se ve el problema
+        - Tamaño al que se está usando el asset
+        - Cualquier información adicional relevante
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidad
+      description: ¿Qué tan grave es este problema?
+      options:
+        - Menor - Problema estético
+        - Media - Afecta la usabilidad
+        - Mayor - Impide el uso del asset
+        - Crítica - Problema legal o de seguridad
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Si es posible, adjunta capturas de pantalla que muestren el problema
