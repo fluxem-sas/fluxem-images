@@ -1,87 +1,87 @@
-# Fluxem Images & Assets Repository
+# Repositorio de Imágenes y Assets de Fluxem
 
 <div align="center">
-  <img src="fluxem/fluxem-icon.png" alt="Fluxem Logo" width="120"/>
-  <h3>Official Assets Repository for Fluxem Projects</h3>
-  <p>Centralized storage for images, logos, icons, and digital assets used across Fluxem ecosystem</p>
+  <img src="fluxem/fluxem-icon.png" alt="Logo de Fluxem" width="120"/>
+  <h3>Repositorio Oficial de Assets para Proyectos Fluxem</h3>
+  <p>Almacenamiento centralizado de imágenes, logos, iconos y assets digitales utilizados en el ecosistema Fluxem</p>
 </div>
 
 ---
 
-## 📋 Overview
+## 📋 Descripción General
 
-This repository serves as the centralized hub for all visual assets, images, logos, and branding materials used across the Fluxem ecosystem. It provides a consistent and organized way to access and manage digital assets for all our projects.
+Este repositorio sirve como el centro centralizado para todos los assets visuales, imágenes, logos y materiales de marca utilizados en el ecosistema Fluxem. Proporciona una forma consistente y organizada de acceder y gestionar assets digitales para todos nuestros proyectos.
 
-## 📁 Repository Structure
+## 📁 Estructura del Repositorio
 
 ```
 fluxem-images/
-├── fluxem/                 # Fluxem brand assets
-│   └── fluxem-icon.png    # Main Fluxem logo/icon
-├── kiaro/                 # Kiaro project assets
-│   ├── logo-kiaro.png     # Kiaro logo (standard)
-│   └── logo-kiaro-white.png # Kiaro logo (white variant)
-├── estyma-icon.png        # Estyma project icon
-└── [other-projects]/      # Future project assets
+├── fluxem/                 # Assets de marca Fluxem
+│   └── fluxem-icon.png    # Logo/icono principal de Fluxem
+├── kiaro/                 # Assets del proyecto Kiaro
+│   ├── logo-kiaro.png     # Logo de Kiaro (estándar)
+│   └── logo-kiaro-white.png # Logo de Kiaro (variante blanca)
+├── estyma-icon.png        # Icono del proyecto Estyma
+└── [otros-proyectos]/     # Assets de proyectos futuros
 ```
 
-## 🎨 Asset Categories
+## 🎨 Categorías de Assets
 
-- **Brand Logos**: Primary logos and brand identities
-- **Icons**: App icons, favicons, and UI elements
-- **Marketing Materials**: Banners, backgrounds, and promotional assets
-- **Project Assets**: Specific assets for individual projects
+- **Logos de Marca**: Logos principales e identidades de marca
+- **Iconos**: Iconos de aplicaciones, favicons y elementos de UI
+- **Material de Marketing**: Banners, fondos y assets promocionales
+- **Assets de Proyectos**: Assets específicos para proyectos individuales
 
-## 📖 Usage Guidelines
+## 📖 Guías de Uso
 
-### For Developers
+### Para Desarrolladores
 ```bash
-# Clone the repository for local development
+# Clonar el repositorio para desarrollo local
 git clone https://github.com/fluxem-sas/fluxem-images.git
 
-# Access assets via raw GitHub URLs in your projects
-https://raw.githubusercontent.com/fluxem-sas/fluxem-images/main/[path-to-asset]
+# Acceder a assets vía URLs raw de GitHub en tus proyectos
+https://raw.githubusercontent.com/fluxem-sas/fluxem-images/main/[ruta-al-asset]
 ```
 
-### For Designers
-1. **Adding new assets**: Create a PR with properly organized assets
-2. **Naming convention**: Use descriptive, lowercase names with hyphens
-3. **File formats**: Prefer PNG for logos, SVG for icons when possible
-4. **Optimization**: Ensure images are optimized for web use
+### Para Diseñadores
+1. **Agregar nuevos assets**: Crear un PR con assets debidamente organizados
+2. **Convención de nomenclatura**: Usar nombres descriptivos, en minúsculas con guiones
+3. **Formatos de archivo**: Preferir PNG para logos, SVG para iconos cuando sea posible
+4. **Optimización**: Asegurar que las imágenes estén optimizadas para web
 
-## 🔄 Contributing
+## 🔄 Contribuir
 
-We welcome contributions to improve our asset library! Please:
+¡Damos la bienvenida a contribuciones para mejorar nuestra biblioteca de assets! Por favor:
 
-1. **Fork** this repository
-2. **Create** a feature branch (`git checkout -b feature/new-assets`)
-3. **Add** your assets following our structure and naming conventions
-4. **Commit** your changes (`git commit -m 'Add new project assets'`)
-5. **Push** to the branch (`git push origin feature/new-assets`)
-6. **Open** a Pull Request
+1. **Haz Fork** de este repositorio
+2. **Crea** una rama de funcionalidad (`git checkout -b feature/nuevos-assets`)
+3. **Agrega** tus assets siguiendo nuestra estructura y convenciones de nomenclatura
+4. **Haz Commit** de tus cambios (`git commit -m 'Agregar assets de nuevo proyecto'`)
+5. **Haz Push** a la rama (`git push origin feature/nuevos-assets`)
+6. **Abre** un Pull Request
 
-### Asset Requirements
-- **Quality**: High-resolution assets suitable for various use cases
-- **Format**: PNG for complex images, SVG for simple graphics/icons
-- **Size**: Reasonable file sizes (optimize when possible)
-- **License**: Ensure you have rights to contribute the assets
+### Requisitos de Assets
+- **Calidad**: Assets de alta resolución adecuados para varios casos de uso
+- **Formato**: PNG para imágenes complejas, SVG para gráficos/iconos simples
+- **Tamaño**: Tamaños de archivo razonables (optimizar cuando sea posible)
+- **Licencia**: Asegurar que tienes los derechos para contribuir con los assets
 
-## 📄 License
+## 📄 Licencia
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-## 🏢 About Fluxem
+## 🏢 Acerca de Fluxem
 
-Fluxem is committed to creating innovative solutions and maintaining high standards in all our projects. This repository is part of our effort to maintain consistency and accessibility across our digital ecosystem.
+Fluxem está comprometida con crear soluciones innovadoras y mantener altos estándares en todos nuestros proyectos. Este repositorio es parte de nuestro esfuerzo para mantener consistencia y accesibilidad en nuestro ecosistema digital.
 
-## 📞 Contact
+## 📞 Contacto
 
-- **Website**: [fluxem.com](https://fluxem.com)
+- **Sitio Web**: [fluxem.com](https://fluxem.com)
 - **Issues**: [GitHub Issues](https://github.com/fluxem-sas/fluxem-images/issues)
 - **Email**: contact@fluxem.com
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by the Fluxem Team</p>
+  <p>Hecho con ❤️ por el Equipo Fluxem</p>
 </div>
